@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.practice
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [annotation-api, app-name, gradle, http-client, java, java-application, junit, lombok, micronaut-build, netty-server, readme, shade, slf4j-simple, yaml]
