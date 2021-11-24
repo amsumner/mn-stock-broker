@@ -3,8 +3,13 @@ package com.practice.controller;
 import com.practice.in_memory_store.InMemoryStore;
 import com.practice.model.Quote;
 import com.practice.model.Symbol;
+import com.practice.model.error.CustomError;
+import io.micronaut.core.type.Argument;
+import io.micronaut.http.HttpRequest;
+import io.micronaut.http.HttpStatus;
 import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.annotation.Client;
+import io.micronaut.http.client.exceptions.HttpClientResponseException;
 import io.micronaut.runtime.EmbeddedApplication;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
@@ -16,10 +21,13 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @Slf4j
 @MicronautTest
 public class QuotesControllerTest {
@@ -56,6 +64,25 @@ public class QuotesControllerTest {
         final Quote amazonResult = client.toBlocking().retrieve("/quotes/AMZN", Quote.class);
         LOG.info("Result {}", amazonResult);
         assertThat(amazon).isEqualToComparingFieldByField(amazonResult);
+    }
+
+    @Test
+    void returnNotFoundOnUnsupportedSymbol() {
+        try {
+            client.toBlocking().retrieve(HttpRequest.GET("/quotes/UNSUPPORTED"),
+                    Argument.of(Quote.class),
+                    Argument.of(CustomError.class)
+            );
+        } catch (HttpClientResponseException error) {
+            assertEquals(HttpStatus.NOT_FOUND, error.getStatus());
+            LOG.info("Body {}", error.getResponse().getBody(CustomError.class));
+            final Optional<CustomError> customError=  error.getResponse().getBody(CustomError.class);
+            assertTrue(customError.isPresent());
+            assertEquals(404, customError.get().getStatus());
+            assertEquals("NOT_FOUND", customError.get().getError());
+            assertEquals("Quote for symbol not available", customError.get().getMessage());
+            assertEquals("/quotes/UNSUPPORTED", customError.get().getPath());
+        }
     }
 
     private Quote initRandomQuote(String symbolValue) {
