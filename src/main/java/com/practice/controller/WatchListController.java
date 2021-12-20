@@ -4,9 +4,11 @@ import com.practice.in_memory_store.InMemoryAccountStore;
 import com.practice.model.WatchList;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.UUID;
 
+@Slf4j
 @Controller("/account/watchlist")
 public class WatchListController {
 
@@ -20,6 +22,7 @@ public class WatchListController {
 
     @Get(produces = MediaType.APPLICATION_JSON)
     public WatchList get() {
+        log.info("GetWatchList - {}", Thread.currentThread().getName());
         return store.getWatchList(ACCOUNT_ID);
     }
 
