@@ -2,8 +2,13 @@ package com.practice.controller;
 
 import com.practice.in_memory_store.InMemoryStore;
 import com.practice.model.Symbol;
+import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 
@@ -16,6 +21,9 @@ public class MarketsController {
         this.inMemoryStore = inMemoryStore;
     }
 
+    @ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON))
+    @Operation(summary = "Return All available markets")
+    @Tag(name = "markets")
     @Get("/")
     public List<Symbol> all() {
         return inMemoryStore.getAllSymbols();
