@@ -6,6 +6,8 @@ import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Scheduler;
@@ -18,6 +20,7 @@ import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 
 @Slf4j
+@Secured(SecurityRule.IS_ANONYMOUS)
 @Controller("/account/watchlist-rx")
 public class WatchListControllerRx {
 

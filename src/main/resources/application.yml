@@ -12,6 +12,14 @@ micronaut:
   openapi:
     views:
       spec: "swagger-ui.enabled=true,swagger-ui.theme=flattop"
+  security:
+    authentication: bearer
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: changeThisSecretToALongSecureString
 
 
 jackson:
