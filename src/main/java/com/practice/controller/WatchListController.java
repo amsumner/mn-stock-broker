@@ -4,11 +4,14 @@ import com.practice.in_memory_store.InMemoryAccountStore;
 import com.practice.model.WatchList;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.UUID;
 
 @Slf4j
+@Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller("/account/watchlist")
 public class WatchListController {
 
