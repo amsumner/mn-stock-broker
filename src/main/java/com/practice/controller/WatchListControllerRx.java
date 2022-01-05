@@ -20,7 +20,7 @@ import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 
 @Slf4j
-@Secured(SecurityRule.IS_ANONYMOUS)
+@Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller("/account/watchlist-rx")
 public class WatchListControllerRx {
 
