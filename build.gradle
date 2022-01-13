@@ -57,6 +57,10 @@ dependencies {
     annotationProcessor("io.micronaut.security:micronaut-security-annotations")
     implementation("io.micronaut.reactor:micronaut-reactor")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
+    implementation('io.micronaut.flyway:micronaut-flyway:5.0.2')
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
+
+
 }
 
 
