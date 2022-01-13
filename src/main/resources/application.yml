@@ -20,7 +20,16 @@ micronaut:
           secret:
             generator:
               secret: changeThisSecretToALongSecureString
-
+flyway:
+  datasources:
+    default:
+      enabled: true
+      clean-schema: false
+      url: ${PG_JDBC_URL:`jdbc:postgresql://localhost:5432/stockbroker`}
+      username: ${PG_USERNAME:postgres}
+      password: ${PG_PASSWORD:}
+      schemas: mn
+      default-schema: mn
 
 jackson:
 #  property-naming-strategy: SNAKE_CASE
