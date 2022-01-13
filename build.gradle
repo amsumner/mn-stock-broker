@@ -58,9 +58,10 @@ dependencies {
     implementation("io.micronaut.reactor:micronaut-reactor")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
     implementation('io.micronaut.flyway:micronaut-flyway:5.0.2')
-    implementation group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
-
-
+    implementation group: 'org.postgresql', name: 'postgresql'
+    implementation group: 'io.micronaut.data', name: 'micronaut-data-hibernate-jpa', version: '3.2.2'
+    implementation group: 'io.micronaut.sql', name: 'micronaut-jdbc-hikari', version: '2.2.6'
+    annotationProcessor group: 'io.micronaut.data', name: 'micronaut-data-processor'
 }
 
 

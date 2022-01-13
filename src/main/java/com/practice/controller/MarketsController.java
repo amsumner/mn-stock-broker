@@ -2,6 +2,8 @@ package com.practice.controller;
 
 import com.practice.in_memory_store.InMemoryStore;
 import com.practice.model.Symbol;
+import com.practice.model.SymbolEntity;
+import com.practice.repository.SymbolsRepository;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
@@ -19,9 +21,11 @@ import java.util.List;
 public class MarketsController {
 
     private final InMemoryStore inMemoryStore;
+    private final SymbolsRepository repository;
 
-    public MarketsController(InMemoryStore inMemoryStore) {
+    public MarketsController(InMemoryStore inMemoryStore, SymbolsRepository repository) {
         this.inMemoryStore = inMemoryStore;
+        this.repository = repository;
     }
 
     @ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON))
@@ -31,4 +35,14 @@ public class MarketsController {
     public List<Symbol> all() {
         return inMemoryStore.getAllSymbols();
     }
+
+    @ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON))
+    @Operation(summary = "Return All available markets from database via JPA")
+    @Tag(name = "markets")
+    @Get("/jpa")
+    public List<SymbolEntity> allSymbolsViaJpa() {
+        return repository.findAll();
+    }
+
+
 }
