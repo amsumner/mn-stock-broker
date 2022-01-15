@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,5 +89,10 @@ public class QuotesController {
     @Get("/jpa/ordered/asc")
     public List<QuoteDTO> orderedAsc() {
         return repository.listOrderByVolumeAsc();
+    }
+
+    @Get("/jpa/{volume}")
+    public List<QuoteDTO> volumeFilter (@PathVariable BigDecimal volume) {
+        return repository.findByVolumeGreaterThanOrderByVolumeAsc(volume);
     }
 }
