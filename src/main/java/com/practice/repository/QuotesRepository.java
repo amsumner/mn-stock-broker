@@ -3,6 +3,9 @@ package com.practice.repository;
 import com.practice.model.persistence.QuoteEntity;
 import com.practice.model.persistence.SymbolEntity;
 import io.micronaut.data.annotation.Repository;
+
+import io.micronaut.data.model.Pageable;
+import io.micronaut.data.model.Slice;
 import io.micronaut.data.repository.CrudRepository;
 
 import java.math.BigDecimal;
@@ -24,4 +27,9 @@ public interface QuotesRepository extends CrudRepository<QuoteEntity, Integer> {
 
     //filter
     List<QuoteDTO> findByVolumeGreaterThanOrderByVolumeAsc(BigDecimal volume);
+
+    //pagination
+    List<QuoteDTO> findByVolumeGreaterThanOrderByVolumeAsc(BigDecimal volume, Pageable pageable);
+
+    Slice<QuoteDTO> list(io.micronaut.data.model.Pageable pageable);
 }
