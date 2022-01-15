@@ -5,6 +5,7 @@ import com.practice.model.Quote;
 import com.practice.model.error.CustomError;
 import com.practice.model.persistence.QuoteEntity;
 import com.practice.model.persistence.SymbolEntity;
+import com.practice.repository.QuoteDTO;
 import com.practice.repository.QuotesRepository;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
@@ -80,12 +81,12 @@ public class QuotesController {
     }
 
     @Get("/jpa/ordered/desc")
-    public List<QuoteEntity> orderedDesc() {
+    public List<QuoteDTO> orderedDesc() {
         return repository.listOrderByVolumeDesc();
     }
 
     @Get("/jpa/ordered/asc")
-    public List<QuoteEntity> orderedAsc() {
+    public List<QuoteDTO> orderedAsc() {
         return repository.listOrderByVolumeAsc();
     }
 }
