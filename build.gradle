@@ -55,13 +55,14 @@ dependencies {
     implementation("io.micronaut.security:micronaut-security-jwt")
     implementation("io.micronaut.security:micronaut-security-annotations")
     annotationProcessor("io.micronaut.security:micronaut-security-annotations")
-    implementation("io.micronaut.reactor:micronaut-reactor")
-    implementation("io.micronaut.reactor:micronaut-reactor-http-client")
+    implementation('io.micronaut.reactor:micronaut-reactor:2.1.1')
+    implementation('io.micronaut.reactor:micronaut-reactor-http-client:2.1.1')
     implementation('io.micronaut.flyway:micronaut-flyway:5.0.2')
     implementation group: 'org.postgresql', name: 'postgresql'
-    implementation group: 'io.micronaut.data', name: 'micronaut-data-hibernate-jpa', version: '3.2.2'
-    implementation group: 'io.micronaut.sql', name: 'micronaut-jdbc-hikari', version: '2.2.6'
+    implementation group: 'io.micronaut.data', name: 'micronaut-data-hibernate-jpa', version: '3.0.0'
+    implementation group: 'io.micronaut.sql', name: 'micronaut-jdbc-hikari', version: '2.0.0'
     annotationProcessor group: 'io.micronaut.data', name: 'micronaut-data-processor'
+    runtimeOnly("ch.qos.logback:logback-classic")
 }
 
 

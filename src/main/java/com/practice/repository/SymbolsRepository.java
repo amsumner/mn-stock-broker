@@ -1,7 +1,6 @@
 package com.practice.repository;
 
-import com.practice.model.Symbol;
-import com.practice.model.SymbolEntity;
+import com.practice.model.persistence.SymbolEntity;
 import io.micronaut.data.annotation.Repository;
 import io.micronaut.data.repository.CrudRepository;
 
