@@ -78,4 +78,14 @@ public class QuotesController {
         }
         return HttpResponse.ok(quote.get());
     }
+
+    @Get("/jpa/ordered/desc")
+    public List<QuoteEntity> orderedDesc() {
+        return repository.listOrderByVolumeDesc();
+    }
+
+    @Get("/jpa/ordered/asc")
+    public List<QuoteEntity> orderedAsc() {
+        return repository.listOrderByVolumeAsc();
+    }
 }
